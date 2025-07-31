@@ -41,29 +41,50 @@
   <canvas id="particle-bg" class="fixed top-0 left-0 w-full h-full -z-10"></canvas>
 
   <!-- Navbar -->
-  <nav class="p-5 flex justify-between items-center bg-white dark:bg-black shadow fixed w-full z-50">
-    <h1 class="download-btn">Noman Muhammadi</h1>
-    <ul class="hidden md:flex space-x-6">
-      <li><a href="index.html" class="hover:text-primary">Home</a></li>
-      <li><a href="about_me/about.html" class="hover:text-primary">About Me</a></li>
-      <li><a href="/project2/index.html" class="hover:text-primary">Projects</a></li>
-      <li><a href="/resume/index.html" class="hover:text-primary">Resume</a></li>
-      <li><a href="/blog/index.html" class="hover:text-primary">Blog</a></li>
-      <li><a href="contact/index.html" class="hover:text-primary">Contact</a></li>
-      <li><a href="admin/index.html" class="hover:text-red-500">Admin</a></li>
-    </ul>
-    
-    <button id="themeToggle" class="ml-4 text-xl text-primary">
-      <i id="icon-moon" class="fas fa-moon"></i>
-      <i id="icon-sun" class="fas fa-sun hidden"></i>
-    </button>
-  </nav>
+ <nav class="p-5 flex justify-between items-center bg-white dark:bg-black shadow fixed w-full z-50">
+  <h1 class="text-xl font-bold text-primary">Noman Muhammadi</h1>
+
+  <!-- Desktop Nav -->
+  <ul class="hidden md:flex space-x-6">
+    <li><a href="index.html" class="hover:text-primary text-gray-900 dark:text-white">Home</a></li>
+    <li><a href="about_me/about.html" class="hover:text-primary text-gray-900 dark:text-white">About Me</a></li>
+    <li><a href="/project2/index.html" class="hover:text-primary text-gray-900 dark:text-white">Projects</a></li>
+    <li><a href="/resume/index.html" class="hover:text-primary text-gray-900 dark:text-white">Resume</a></li>
+    <li><a href="/blog/index.html" class="hover:text-primary text-gray-900 dark:text-white">Blog</a></li>
+    <li><a href="contact/index.html" class="hover:text-primary text-gray-900 dark:text-white">Contact</a></li>
+    <li><a href="admin/index.html" class="hover:text-red-500 text-gray-900 dark:text-white">Admin</a></li>
+  </ul>
+
+  <!-- Mobile Toggle Button -->
+  <button id="mobileMenuButton" class="md:hidden text-2xl text-primary focus:outline-none">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <!-- Mobile Menu -->
+  <ul id="mobileMenu" class="hidden absolute top-20 right-4 w-48 bg-white dark:bg-black border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg p-4 space-y-3 z-50 md:hidden">
+    <li><a href="index.html" class="block text-gray-900 dark:text-white hover:text-primary">Home</a></li>
+    <li><a href="about_me/about.html" class="block text-gray-900 dark:text-white hover:text-primary">About Me</a></li>
+    <li><a href="/project2/index.html" class="block text-gray-900 dark:text-white hover:text-primary">Projects</a></li>
+    <li><a href="/resume/index.html" class="block text-gray-900 dark:text-white hover:text-primary">Resume</a></li>
+    <li><a href="/blog/index.html" class="block text-gray-900 dark:text-white hover:text-primary">Blog</a></li>
+    <li><a href="contact/index.html" class="block text-gray-900 dark:text-white hover:text-primary">Contact</a></li>
+    <li><a href="admin/index.html" class="block text-red-500 hover:text-red-400">Admin</a></li>
+  </ul>
+
+  <!-- Theme Toggle -->
+  <button id="themeToggle" class="ml-4 text-xl text-primary">
+    <i id="icon-moon" class="fas fa-moon"></i>
+    <i id="icon-sun" class="fas fa-sun hidden"></i>
+  </button>
+</nav>
+
 
   <!-- Home Section -->
   <section id="home" class="h-screen flex flex-col items-center justify-center text-center pt-24 px-4">
     <div class="text-4xl md:text-6xl font-bold text-primary" id="typedText"></div>
     <p class="mt-4 text-lg md:text-2xl">I build full-stack web applications</p>
-    <img src="assets/profile.png" alt="Profile" class="profile-pic">
+   <img src="assets/profile.png" alt="Profile" class="profile-pic mt-6 w-48 h-48 rounded-full object-cover" />
+
     <div class="mt-6 space-x-4">
       <a href="project2/index.html" class=" bg-primary text-white px-6 py-2 rounded hover:bg-orange-600 transition">View Portfolio</a>
       <a href="contact/index.html" class="border border-primary text-primary px-6 py-2 rounded hover:bg-orange-100 dark:hover:bg-gray-700 transition">Contact Me</a>
