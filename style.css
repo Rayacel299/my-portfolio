@@ -1,0 +1,38 @@
+body {
+  font-family: 'Inter', sans-serif;
+}
+ .profile-pic {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #ff6700;
+      margin: 0 auto 15px;
+      box-shadow: 0 0 15px #ff6700aa;
+      transition: transform 0.3s ease;
+    }
+    .profile-pic:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #ffa347dd;
+    }
+
+     .download-btn {
+      background-color: #ff6700;
+      border: none;
+      color: #121212;
+      font-weight: 700;
+      padding: 12px 20px;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 0 10px #ff6700cc;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+    }
+    .download-btn:hover {
+      background-color: #e65c00;
+      box-shadow: 0 0 20px #e65c00cc;
+      color: #fff;
+    }
