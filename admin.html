@@ -4,16 +4,200 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #f4f6f9;
+      color: #333;
+    }
+
+    .admin-container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 240px;
+      background: #2f3542;
+      padding: 20px;
+      color: #fff;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+    }
+
+    .sidebar.active {
+      transform: translateX(0);
+    }
+
+    .sidebar .logo {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      color: #dcdde1;
+      text-decoration: none;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background: #57606f;
+      color: #fff;
+    }
+
+    .profile-pic {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #ff6700;
+      margin: 20px auto;
+      display: block;
+      box-shadow: 0 0 15px #ff6700aa;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #ffa347dd;
+    }
+
+    .main-content {
+      flex: 1;
+      margin-left: 240px;
+      padding: 20px;
+      transition: margin-left 0.3s ease;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-profile img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ff6700;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.5rem;
+      color: #333;
+      cursor: pointer;
+      z-index: 1100;
+    }
+
+    .sidebar.active ~ .main-content .hamburger i.fa-times {
+      color: red;
+    }
+
+    .cards {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 20px;
+      flex: 1;
+      min-width: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card i {
+      font-size: 2rem;
+      color: #1e90ff;
+    }
+
+    .overview img {
+      width: 100%;
+      max-height: 250px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .sidebar {
+        width: 220px;
+        transform: translateX(-100%);
+      }
+
+      .main-content {
+        margin-left: 0;
+      }
+
+      .sidebar.active ~ .main-content {
+        margin-left: 0;
+      }
+
+      .sidebar.active ~ .main-content h2 {
+        display: none;
+      }
+
+      .cards {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="admin-container">
-    <aside class="sidebar">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
       <div class="logo">
         <i class="fas fa-chart-line"></i> AdminPanel
       </div>
+      <img src="assets/profile.png" alt="Profile" class="profile-pic" />
       <nav>
         <a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a>
         <a href="#"><i class="fas fa-users"></i> Users</a>
@@ -22,11 +206,15 @@
       </nav>
     </aside>
 
+    <!-- Main Content -->
     <main class="main-content">
       <header class="topbar">
+        <span class="hamburger" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </span>
         <h2>Dashboard</h2>
         <div class="user-profile">
-          <img src="assets/profile.png" class="profile-pic" width="200px" alt="User">
+          <img src="assets/profile.png" alt="User" />
           <span>Admin</span>
         </div>
       </header>
@@ -61,152 +249,37 @@
       </section>
     </main>
   </div>
-  <style>
 
-    * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
+  <!-- JavaScript for Sidebar Toggle -->
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const menuToggle = document.getElementById('menuToggle');
+    const icon = menuToggle.querySelector('i');
 
-body {
-  background: #f4f6f9;
-  color: #333;
-}
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
 
-.admin-container {
-  display: flex;
-  min-height: 100vh;
-}
+      if (sidebar.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    });
 
-/* Sidebar */
-.sidebar {
-  width: 220px;
-  background: #2f3542;
-  padding: 20px;
-  color: #fff;
-}
-
-.sidebar .logo {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 30px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.profile-pic {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #ff6700;
-      margin: 0 auto 15px;
-      box-shadow: 0 0 15px #ff6700aa;
-      transition: transform 0.3s ease;
-    }
-    .profile-pic:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px #ffa347dd;
-    }
-
-     .download-btn {
-      background-color: #ff6700;
-      border: none;
-      color: #121212;
-      font-weight: 700;
-      padding: 12px 20px;
-      cursor: pointer;
-      font-size: 1rem;
-      box-shadow: 0 0 10px #ff6700cc;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      text-decoration: none;
-    }
-    .download-btn:hover {
-      background-color: #e65c00;
-      box-shadow: 0 0 20px #e65c00cc;
-      color: #fff;
-    }
-
-.sidebar nav a {
-  display: flex;
-  align-items: center;
-  padding: 12px;
-  color: #dcdde1;
-  text-decoration: none;
-  margin-bottom: 10px;
-  border-radius: 4px;
-  transition: background 0.3s;
-}
-
-.sidebar nav a:hover,
-.sidebar nav a.active {
-  background: #57606f;
-  color: #fff;
-}
-
-/* Main Content */
-.main-content {
-  flex: 1;
-  padding: 20px;
-}
-
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.user-profile {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.user-profile img {
-  border-radius: 50%;
-}
-
-.cards {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-bottom: 40px;
-}
-
-.card {
-  background: #fff;
-  padding: 20px;
-  flex: 1;
-  min-width: 200px;
-  display: flex;
-  align-items: center;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
-  gap: 15px;
-}
-
-.card i {
-  font-size: 1.8rem;
-  color: #1e90ff;
-}
-
-.card h3 {
-  margin: 0;
-}
-
-.overview img {
-  width: 50%;
-  max-height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-  </style>
+    // Optional: close sidebar on outside click (mobile)
+    document.addEventListener('click', function (e) {
+      if (
+        window.innerWidth <= 768 &&
+        !sidebar.contains(e.target) &&
+        !menuToggle.contains(e.target)
+      ) {
+        sidebar.classList.remove('active');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    });
+  </script>
 </body>
 </html>

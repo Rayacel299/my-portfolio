@@ -1,167 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>About Me</title>
- 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    <style>
-      .profile-pic {
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Me - Noman Muhammadi</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    :root {
+      --primary: #ff6700;
+      --bg: #121212;
+      --text-light: #ddd;
+      --accent: #ffa733;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: white;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header.hero {
+      background: url('https://source.unsplash.com/1600x600/?technology,code') no-repeat center center/cover;
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      margin: 0 0 10px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #eee;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    .profile-section {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .profile-pic {
       width: 140px;
       height: 140px;
       border-radius: 50%;
       object-fit: cover;
-      border: 4px solid #ff6700;
-      margin: 0 auto 15px;
-      box-shadow: 0 0 15px #ff6700aa;
-      transition: transform 0.3s ease;
+      border: 4px solid var(--primary);
+      box-shadow: 0 0 15px var(--primary);
+      transition: transform 0.3s;
     }
+
     .profile-pic:hover {
       transform: scale(1.05);
-      box-shadow: 0 0 25px #ffa347dd;
+      box-shadow: 0 0 25px var(--accent);
     }
-     .download-btn {
-      background-color: #ff6700;
-      border: none;
-      color: #121212;
-      font-weight: 700;
-      padding: 12px 20px;
-      cursor: pointer;
-      font-size: 1rem;
-      box-shadow: 0 0 10px #ff6700cc;
+
+    h2.section-title {
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .bio {
+      max-width: 700px;
+      margin: 20px auto;
+      font-size: 1.1rem;
+      color: var(--text-light);
+    }
+
+    .skills ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+      gap: 15px;
+    }
+
+    .skills li {
+      background: #1e1e1e;
+      padding: 10px 20px;
+      border-radius: 5px;
       display: flex;
       align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+    }
+
+    .skills i {
+      color: var(--primary);
+      font-size: 1.3rem;
+    }
+
+    .social {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .social a {
+      margin: 0 10px;
+      font-size: 1.8em;
+      transition: color 0.3s;
+    }
+
+    .social a:hover {
+      color: var(--primary);
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .project-card {
+      background: #1c1c1c;
+      padding: 20px;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .project-card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .download-btn {
+      background-color: var(--primary);
+      color: black;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
       gap: 8px;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      text-decoration: none;
+      box-shadow: 0 0 10px var(--primary);
+      margin-top: 20px;
+      transition: background-color 0.3s, color 0.3s;
     }
+
     .download-btn:hover {
-      background-color: #e65c00;
-      box-shadow: 0 0 20px #e65c00cc;
-      color: #fff;
+      background-color: var(--accent);
+      color: white;
     }
 
+    footer {
+      text-align: center;
+      padding: 30px 10px;
+      font-size: 0.9rem;
+      color: #999;
+      border-top: 1px solid #2a2a2a;
+    }
 
-    </style>
-  <a href="index.html" class="download-btn"><i class="fas fa-home"></i> Home</a>
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .skills ul {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>Hello, I'm Noman Muhammadi</h1>
+    <p>A passionate Web Developer crafting engaging digital experiences.</p>
+  </header>
 
   <div class="container">
-    <div class="profile">
+    <div class="profile-section">
       <img src="assets/profile.png" alt="Profile Picture" class="profile-pic">
-      <h1>Hi, I'm Noman Muhammadi</h1>
-      <p class="bio">I'm a web developer passionate about building fast, accessible, and engaging websites.</p>
+      <p class="bio">I’m a front-end web developer focused on building clean, user-friendly websites using modern technologies like HTML5, CSS3, JavaScript, and React. I love learning new things and turning ideas into real-world solutions.</p>
+      <a href="assets/resume.pdf" class="download-btn" download><i class="fas fa-download"></i> Download Resume</a>
     </div>
 
-    <div class="skills">
-      <h2>Skills</h2>
+    <section class="skills">
+      <h2 class="section-title">My Skills</h2>
       <ul>
         <li><i class="fab fa-html5"></i> HTML5</li>
         <li><i class="fab fa-css3-alt"></i> CSS3</li>
         <li><i class="fab fa-js"></i> JavaScript</li>
         <li><i class="fab fa-react"></i> React</li>
+        <li><i class="fab fa-git-alt"></i> Git</li>
+        <li><i class="fas fa-code"></i> Responsive Design</li>
       </ul>
-    </div>
+    </section>
 
-    <div class="social">
-      <h2>Connect with me</h2>
-      <a href="https://rayacel299.github.io/my-portfolio" target="_blank"><i class="fab fa-github"></i></a>
+    <section class="projects">
+      <h2 class="section-title">Projects</h2>
+      <div class="project-card">
+        <img src="assets/project3.jpg" alt="Project 1">
+        <h3>Portfolio Website</h3>
+        <p>My personal portfolio built with HTML, CSS, and JS to showcase my work and skills.</p>
+      </div>
+      <div class="project-card">
+        <img src="assets/project2.png" alt="Project 2">
+        <h3>React Weather App</h3>
+        <p>A real-time weather forecast app using OpenWeather API and React.js.</p>
+      </div>
+    </section>
+
+    <section class="social">
+      <h2 class="section-title">Connect With Me</h2>
+      <a href="https://github.com/rayacel299" target="_blank"><i class="fab fa-github"></i></a>
       <a href="#"><i class="fab fa-linkedin"></i></a>
       <a href="#"><i class="fab fa-twitter"></i></a>
-    </div>
+    </section>
   </div>
+
+  <footer>
+    &copy; 2025 Noman Muhammadi. All rights reserved.
+  </footer>
+
 </body>
-
-
-<style>
-    body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #121212;
-  color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
-.container {
-  max-width: 800px;
-  padding: 20px;
-  text-align: center;
-}
-
-.profile-img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 4px solid orange;
-  margin-bottom: 20px;
-}
-
-h1, h2 {
-  color: orange;
-}
-
-.bio {
-  font-size: 1.1em;
-  margin: 10px 0 30px;
-  color: #ddd;
-}
-
-.skills ul {
-  list-style: none;
-  padding: 0;
-}
-
-.skills li {
-  font-size: 1.1em;
-  margin: 10px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.skills i {
-  color: orange;
-  font-size: 1.5em;
-}
-
-.social a {
-  color: white;
-  margin: 0 10px;
-  font-size: 1.8em;
-  transition: color 0.3s;
-}
-
-.social a:hover {
-  color: orange;
-}
-
-.home-btn {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  text-decoration: none;
-  background-color: orange;
-  color: black;
-  padding: 8px 15px;
-  border-radius: 5px;
-  font-weight: bold;
-  transition: background-color 0.3s;
-}
-
-.home-btn i {
-  margin-right: 5px;
-}
-
-.home-btn:hover {
-  background-color: #ffa733;
-}
-
-
-</style>
 </html>
